@@ -28,10 +28,10 @@ sns.heatmap(grouped_averages.T, cmap='YlGnBu', annot=True, fmt='.2f', cbar_kws={
 
 plt.title('Heatmap of Prevalence of Topics by Year')
 plt.xlabel('Year')
-#plt.ylabel('Topics')
+
 plt.xticks(rotation=45)
 plt.yticks(rotation=0)
 
-# Display the plot
+
 plt.tight_layout()
 plt.show()
