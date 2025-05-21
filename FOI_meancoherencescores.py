@@ -21,8 +21,6 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 
 
-import glob
-
 import matplotlib.pyplot as plt 
 import matplotlib.ticker
 
