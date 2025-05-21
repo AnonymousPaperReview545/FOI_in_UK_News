@@ -66,10 +66,10 @@ nx.draw(
     G,
     pos,
     node_color='lightblue',
-    node_size=2000,  # Decrease node size to reduce overlap
+    node_size=2000,  
     edge_color='gray',
     linewidths=0.5,
-    width=widths  # Apply scaled edge thickness
+    width=widths  
 )
 
 
