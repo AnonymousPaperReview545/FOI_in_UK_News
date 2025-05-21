@@ -160,8 +160,6 @@ topic_distribution_by_document = combined_df.groupby('Index')[numeric_columns.co
 
 topic_distribution_by_year_publication = combined_df.groupby(['Index','Year', 'Newspapers'])[numeric_columns.columns].mean().reset_index()
 
-topic_distribution_by_year_publication.to_csv('', index=False)
-
 
 topics = lda.print_topics()
 
@@ -181,7 +179,6 @@ plt.show()
 
 topics_df = pd.DataFrame(topics, columns=['Topic_Number', 'Words'])
 
-topics_df.to_csv('')
 
 coherence_model_lda_model = CoherenceModel(model=lda, texts=df_lemmatized, dictionary=id2word, coherence='c_v')
 coherence_lda_model = coherence_model_lda_model.get_coherence()
@@ -241,7 +238,6 @@ topics=optimal_model.print_topics(num_words=10,num_topics=num_topics)
 
 topics_df = pd.DataFrame(topics, columns=['Topic_Number', 'Words'])
 
-topics_df.to_csv('')
 
 def format_topics_sentences(ldamodel=lda, corpus=corpus, texts=df_lemmatized):
     
