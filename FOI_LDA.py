@@ -40,9 +40,9 @@ import matplotlib.ticker
 plt.style.use('ggplot')
 
 
-plt.rcParams['figure.figsize'] = (8,6) #can change the size of bars
+plt.rcParams['figure.figsize'] = (8,6) 
 
-plt.rcParams['font.size'] = 12 #can change the size of font
+plt.rcParams['font.size'] = 12 
 
 from nltk.corpus import stopwords
 
@@ -160,15 +160,10 @@ topic_distribution_by_document = combined_df.groupby('Index')[numeric_columns.co
 
 topic_distribution_by_year_publication = combined_df.groupby(['Index','Year', 'Newspapers'])[numeric_columns.columns].mean().reset_index()
 
-topic_distribution_by_year_publication.to_csv('', index=False)
-
-
 topics = lda.print_topics()
 
 text = ' '.join([topic[1] for topic in topics])
 
-
-font_path = r''
 
 wordcloud = WordCloud(width=800, height=400, background_color='white',font_path=font_path).generate(text)
 
@@ -178,10 +173,8 @@ plt.axis('off')
 plt.show()
 
 
-
 topics_df = pd.DataFrame(topics, columns=['Topic_Number', 'Words'])
 
-topics_df.to_csv('')
 
 coherence_model_lda_model = CoherenceModel(model=lda, texts=df_lemmatized, dictionary=id2word, coherence='c_v')
 coherence_lda_model = coherence_model_lda_model.get_coherence()
@@ -193,11 +186,8 @@ def compute_coherence_values(dictionary, corpus, texts, limit, start=2, step=3):
     coherence_values = []
     model_list = []
     for num_topics in range(start, limit, step):
-        #model = lda_model(model=model, corpus=corpus, num_topics=num_topics, id2word=id2word)
         model = LdaModel(corpus=corpus, id2word=id2word,num_topics=num_topics, random_state=42)
-        #model=lda_model
         model_list.append(model)
-        #model_list=pd.concat([model_list,model])
         coherencemodel = CoherenceModel(model=model, texts=texts, dictionary=dictionary, coherence='c_v')
         coherence_values.append(coherencemodel.get_coherence())
 
@@ -218,7 +208,7 @@ for m, cv in zip(x, coherence_values):
     print("Num Topics =", m, " has Coherence Value of", round(cv, 4))
 
 
-target_topic_number = 32  # Example: Print coherence value for topic number 5
+target_topic_number = 32  
 print("Starting loop...")
 for m, cv in zip(x, coherence_values):
     if m == target_topic_number:
@@ -241,8 +231,6 @@ topics=optimal_model.print_topics(num_words=10,num_topics=num_topics)
 
 topics_df = pd.DataFrame(topics, columns=['Topic_Number', 'Words'])
 
-topics_df.to_csv('')
-
 def format_topics_sentences(ldamodel=lda, corpus=corpus, texts=df_lemmatized):
     
     sent_topics_df = pd.DataFrame()
@@ -253,18 +241,16 @@ def format_topics_sentences(ldamodel=lda, corpus=corpus, texts=df_lemmatized):
     
     for i, row in enumerate(ldamodel[corpus]):
         row = sorted(row, key=lambda x: (x[1]), reverse=True)
-        # Get the Dominant topic, Perc Contribution and Keywords for each document
+        
         for j, (topic_num, prop_topic) in enumerate(row):
-            if j == 0:  # => dominant topic
+            if j == 0:  
                 wp = ldamodel.show_topic(topic_num)
                 topic_keywords = ", ".join([word for word, prop in wp])
-                #sent_topics_df = sent_topics_df.append(pd.Series([int(topic_num), round(prop_topic,4), topic_keywords]), ignore_index=True)
                 
-
                 data = {'Topic_Num': [int(topic_num)], 'Prop_Topic': [round(prop_topic, 4)], 'Topic_Keywords': [topic_keywords]}
-                ## Create DataFrames from the data
+                
                 df = pd.DataFrame(data)
-                # Concatenate the DataFrames along the row axis (vertically)
+                
                 sent_topics_df = pd.concat([sent_topics_df,df], ignore_index=True)
                 
             else:
@@ -273,7 +259,6 @@ def format_topics_sentences(ldamodel=lda, corpus=corpus, texts=df_lemmatized):
             
     sent_topics_df.columns = ['Dominant_Topic', 'Perc_Contribution', 'Topic_Keywords']
 
-    # Add original text to the end of the output
     contents = pd.Series(texts)
     sent_topics_df = pd.concat([sent_topics_df, contents], axis=1)
     return(sent_topics_df)
@@ -294,7 +279,6 @@ df.index.name ='index'
 df_dominant_topic_new= df_dominant_topic.merge(df,how='left',on='index')
 df_dominant_topic_new
 df_dominant_topic_new=df_dominant_topic_new[['Document_No','Dominant_Topic','Topic_Perc_Contrib','Keywords',
-                                             #'Text_x',
                                              'Year','Newspapers']]
 
 
@@ -325,8 +309,6 @@ df_mostrepresentative_new = df_mostrepresentative_new[['index','Index', 'Topic_N
 
 df_mostrepresentative_new
 
-df_mostrepresentative_new.to_csv('')
-
 
 topic_counts = df_topic_sents_keywords['Dominant_Topic'].value_counts()
 
@@ -339,9 +321,6 @@ df_dominant_topics = pd.concat([topic_num_keywords, topic_counts, topic_contribu
 
 
 df_dominant_topics.columns = ['Dominant_Topic', 'Topic_Keywords', 'Num_Documents', 'Perc_Documents']
-
-
-df_dominant_topics.head()
 
 
 df_dominant_topics_contribution= pd.concat([topic_counts, topic_contribution], axis=1)
