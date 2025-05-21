@@ -123,7 +123,7 @@ top_ngrams_df = top_ngrams_df.sort_values(['Year', 'Newspaper','Rank'])
 
 def clean_ngram(ngram):
     if isinstance(ngram, tuple):
-        ngram_str = ' '.join(ngram)  # Join tuple elements with space
+        ngram_str = ' '.join(ngram)  
     elif isinstance(ngram, str):
         ngram_str = ngram
     else:
