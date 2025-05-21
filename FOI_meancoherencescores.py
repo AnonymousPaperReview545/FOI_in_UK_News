@@ -26,13 +26,6 @@ from gensim.utils import simple_preprocess
 
 from gensim.models import CoherenceModel
 
-import pyLDAvis
-
-import pyLDAvis.gensim_models as gensimvis
-
-pyLDAvis.enable_notebook() 
-
-from wordcloud import WordCloud
 
 import glob
 
@@ -46,9 +39,9 @@ import numpy as np
 plt.style.use('ggplot')
 
 
-plt.rcParams['figure.figsize'] = (8,6) #can change the size of bars
+plt.rcParams['figure.figsize'] = (8,6) 
 
-plt.rcParams['font.size'] = 12 #can change the size of font
+plt.rcParams['font.size'] = 12 
 
 from nltk.corpus import stopwords
 
