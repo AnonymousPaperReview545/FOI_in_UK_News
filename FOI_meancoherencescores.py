@@ -1,12 +1,6 @@
 
 import pandas as pd
 
-import re
-
-import numpy as np
-
-import os
-
 import nltk
 
 import pyLDAvis.gensim
@@ -34,7 +28,6 @@ import matplotlib.ticker
 
 from gensim.models import LdaModel
 from gensim.models.coherencemodel import CoherenceModel
-import numpy as np
 
 plt.style.use('ggplot')
 
@@ -48,10 +41,9 @@ from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 
 
-import os
+
 from gensim.models import LdaModel
 
-os.environ['MALLET_HOME'] = 'E:\\temp\\mallet-2.0.8'
 
 df=pd.read_csv(r"file.csv", encoding='Latin-1')
 
